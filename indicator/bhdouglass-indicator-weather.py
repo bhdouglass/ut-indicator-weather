@@ -99,16 +99,19 @@ class WeatherIndicator(object):
                 print('Failed to load the config file: {}'.format(str(sys.exc_info()[0])))
 
             if 'api_key' in config_json:
-                self.api_key = config_json['api_key']
+                self.api_key = config_json['api_key'].strip()
 
             if 'lat' in config_json:
-                self.lat = config_json['lat']
+                self.lat = config_json['lat'].strip()
 
             if 'lng' in config_json:
-                self.lng = config_json['lng']
+                self.lng = config_json['lng'].strip()
 
             if 'unit' in config_json:
-                self.unit = config_json['unit']
+                self.unit = config_json['unit'].strip()
+
+        if self.unit != 'f' and self.unit != 'c' and self.unit != 'k':
+            self.unit = 'f'
 
     def current_action_activated(self, action, data):
         print('current_action_activated')

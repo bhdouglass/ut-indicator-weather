@@ -14,10 +14,10 @@ Settings::Settings() {
     QJsonDocument doc = QJsonDocument::fromJson(config.readAll());
     QJsonObject object = doc.object();
 
-    m_apiKey = object.value("api_key").toString();
-    m_lat = object.value("lat").toString();
-    m_lng = object.value("lng").toString();
-    m_unit = object.value("unit").toString();
+    m_apiKey = object.value("api_key").toString().trimmed();
+    m_lat = object.value("lat").toString().trimmed();
+    m_lng = object.value("lng").toString().trimmed();
+    m_unit = object.value("unit").toString().trimmed();
     if (m_unit != "f" && m_unit != "c" && m_unit != "k") {
         m_unit = "f";
     }
@@ -32,10 +32,10 @@ Settings::Settings() {
 
 void Settings::save() {
     QJsonObject object;
-    object.insert("api_key", QJsonValue(m_apiKey));
-    object.insert("lat", QJsonValue(m_lat));
-    object.insert("lng", QJsonValue(m_lng));
-    object.insert("unit", QJsonValue(m_unit));
+    object.insert("api_key", QJsonValue(m_apiKey.trimmed()));
+    object.insert("lat", QJsonValue(m_lat.trimmed()));
+    object.insert("lng", QJsonValue(m_lng.trimmed()));
+    object.insert("unit", QJsonValue(m_unit.trimmed()));
 
     QJsonDocument doc;
     doc.setObject(object);
