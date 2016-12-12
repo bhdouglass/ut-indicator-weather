@@ -1,0 +1,2 @@
+add_subdirectory(PamAuthentication)
+add_subdirectory(Indicator)

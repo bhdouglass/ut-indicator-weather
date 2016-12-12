@@ -1,0 +1,4 @@
+Update pam auth to ubuntu components v1.3
+Allow refresh time to be configurable
+Get lat/lng from device
+Change app icon based on weather conditions

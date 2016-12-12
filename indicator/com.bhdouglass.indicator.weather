@@ -1,0 +1,8 @@
+[Indicator Service]
+Name=bhdouglass-indicator-weather
+ObjectPath=/com/bhdouglass/indicator/weather
+Position=80
+
+[phone]
+ObjectPath=/com/bhdouglass/indicator/weather/phone
+Position=80

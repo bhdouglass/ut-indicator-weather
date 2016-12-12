@@ -1,0 +1,7 @@
+module com.ubuntu.PamAuthentication
+plugin PamAuthentication
+
+AuthenticationService 0.1 AuthenticationService.qml
+
+internal AuthenticationDialog AuthenticationDialog.qml
+internal NotifyDialog NotifyDialog.qml

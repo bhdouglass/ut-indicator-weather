@@ -1,0 +1,15 @@
+{
+    "name": "indicator-weather.bhdouglass",
+    "description": "A basic indicator for the weather",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Indicator Weather",
+    "hooks": {
+        "indicator-weather": {
+            "apparmor": "indicator-weather.apparmor",
+            "desktop":  "indicator-weather.desktop"
+        }
+    },
+    "version": "0.01",
+    "maintainer": "Brian Douglass <bhdouglass@gmail.com>",
+    "framework" : "ubuntu-sdk-15.04.7"
+}
