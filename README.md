@@ -4,6 +4,8 @@ A weather indicator for Ubuntu Touch. Indicator Weather uses data from
 [Dark Sky](https://darksky.net/poweredby/) to provide a current weather outlook
 on the Ubuntu Touch indicator bar.
 
+[Get it on the OpenStore.](https://open.uappexplorer.com/app/indicator-weather.bhdouglass)
+
 ## About the Indicator
 
 The indicator itself is rather simle. It's a python script that exports a Gtk
