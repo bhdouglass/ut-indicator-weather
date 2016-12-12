@@ -224,6 +224,10 @@ MainView {
                     color: UbuntuColors.orange
                 }
 
+                Label {
+                    text: 'You\'ll need your device to have a writable system\nin order to install or uninstall'
+                }
+
                 Button {
                     visible: !Indicator.isInstalled
 
