@@ -19,11 +19,11 @@ MainView {
         onSaved: {
             message.visible = true;
             if (success) {
-                message.text = 'Saved the settings, please reboot';
+                message.text = i18n.tr("Saved the settings, please reboot");
                 message.color = UbuntuColors.green;
             }
             else {
-                message.text = 'Failed to save the settings';
+                message.text = i18n.tr("Failed to save the settings");
                 message.color = UbuntuColors.red;
             }
         }
@@ -38,7 +38,7 @@ MainView {
     Page {
         header: PageHeader {
             id: header
-            title: i18n.tr('Indicator Weather')
+            title: i18n.tr("Indicator Weather")
         }
 
         Flickable {
@@ -75,7 +75,7 @@ MainView {
                 }
 
                 Label {
-                    text: 'Dark Sky API Key'
+                    text: i18n.tr("Dark Sky API Key")
                     Layout.fillWidth: true
                 }
 
@@ -89,7 +89,7 @@ MainView {
                 }
 
                 Label {
-                    text: 'Click to signup for an API key'
+                    text: i18n.tr("Click to signup for an API key")
                     color: 'blue'
 
                     MouseArea {
@@ -99,7 +99,7 @@ MainView {
                 }
 
                 Label {
-                    text: 'Latitude'
+                    text: i18n.tr("Latitude")
                     Layout.fillWidth: true
                 }
 
@@ -113,7 +113,7 @@ MainView {
                 }
 
                 Label {
-                    text: 'Longitude'
+                    text: i18n.tr("Longitude")
                     Layout.fillWidth: true
                 }
 
@@ -127,7 +127,7 @@ MainView {
                 }
 
                 Label {
-                    text: 'Temperature Unit'
+                    text: i18n.tr("Temperature Unit")
                     Layout.fillWidth: true
                 }
 
@@ -150,7 +150,7 @@ MainView {
                     }
 
                     Label {
-                        text: 'Fahrenheit'
+                        text: i18n.tr("Fahrenheit")
 
                         MouseArea {
                             anchors.fill: parent
@@ -178,7 +178,7 @@ MainView {
                     }
 
                     Label {
-                        text: 'Celsius'
+                        text: i18n.tr("Celsius")
 
                         MouseArea {
                             anchors.fill: parent
@@ -206,7 +206,7 @@ MainView {
                     }
 
                     Label {
-                        text: 'Kelvin'
+                        text: i18n.tr("Kelvin")
 
                         MouseArea {
                             anchors.fill: parent
@@ -216,7 +216,7 @@ MainView {
                 }
 
                 Button {
-                    text: 'Save'
+                    text: i18n.tr("Save")
                     onClicked: {
                         message.visible = false;
                         settings.save();
@@ -227,7 +227,7 @@ MainView {
                 Button {
                     visible: !Indicator.isInstalled
 
-                    text: 'Install Indicator'
+                    text: i18n.tr("Install Indicator")
                     onClicked: {
                         message.visible = false;
                         Indicator.install();
@@ -238,7 +238,7 @@ MainView {
                 Button {
                     visible: Indicator.isInstalled
 
-                    text: 'Uninstall Indicator'
+                    text: i18n.tr("Uninstall Indicator")
                     onClicked: {
                         message.visible = false;
 
@@ -274,11 +274,11 @@ MainView {
         onInstalled: {
             message.visible = true;
             if (success) {
-                message.text = 'Successfully installed, please reboot';
+                message.text = i18n.tr("Successfully installed, please reboot");
                 message.color = UbuntuColors.green;
             }
             else {
-                message.text = 'Failed to install';
+                message.text = i18n.tr("Failed to install");
                 message.color = UbuntuColors.red;
             }
         }
@@ -286,11 +286,11 @@ MainView {
         onUninstalled: {
             message.visible = true;
             if (success) {
-                message.text = 'Successfully uninstalled, please reboot';
+                message.text = i18n.tr("Successfully uninstalled, please reboot");
                 message.color = UbuntuColors.green;
             }
             else {
-                message.text = 'Failed to uninstall';
+                message.text = i18n.tr("Failed to uninstall");
                 message.color = UbuntuColors.red;
             }
         }
