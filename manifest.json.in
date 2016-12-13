@@ -9,7 +9,7 @@
             "desktop":  "indicator-weather.desktop"
         }
     },
-    "version": "1.02",
+    "version": "1.10",
     "maintainer": "Brian Douglass <bhdouglass@gmail.com>",
     "framework" : "ubuntu-sdk-15.04.7"
 }

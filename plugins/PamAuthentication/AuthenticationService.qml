@@ -34,7 +34,7 @@ Item {
 
     Component.onCompleted: {
       //  if ( systemAuthentication.requireAuthentication() ) {
-            displayLoginDialog();
+            //displayLoginDialog();
       //  }
     }
 

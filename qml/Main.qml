@@ -224,17 +224,13 @@ MainView {
                     color: UbuntuColors.orange
                 }
 
-                Label {
-                    text: 'You\'ll need your device to have a writable system\nin order to install or uninstall'
-                }
-
                 Button {
                     visible: !Indicator.isInstalled
 
                     text: 'Install Indicator'
                     onClicked: {
                         message.visible = false;
-                        Indicator.install(pam.password);
+                        Indicator.install();
                     }
                     color: UbuntuColors.green
                 }
@@ -245,7 +241,13 @@ MainView {
                     text: 'Uninstall Indicator'
                     onClicked: {
                         message.visible = false;
-                        Indicator.uninstall(pam.password);
+
+                        if (Indicator.isInstalledSystem) {
+                            pam.displayLoginDialog();
+                        }
+                        else {
+                            Indicator.uninstall();
+                        }
                     }
                 }
 
@@ -261,6 +263,9 @@ MainView {
         id: pam
         serviceName: 'indicator-weather'
         onDenied: Qt.quit();
+        onGranted: {
+            Indicator.uninstall(pam.password);
+        }
     }
 
     Connections {
