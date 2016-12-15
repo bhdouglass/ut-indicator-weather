@@ -59,7 +59,6 @@ bool Indicator::checkInstalled() {
 
     m_isInstalled = (session.exists() && indicator.exists()) || (systemSession.exists() && systemIndicator.exists());
     m_isInstalledSystem = (systemSession.exists() && systemIndicator.exists());
-    qDebug() << systemSession.exists() << systemIndicator.exists();
     Q_EMIT isInstalledChanged(m_isInstalled);
     Q_EMIT isInstalledSystemChanged(m_isInstalledSystem);
 
