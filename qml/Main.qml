@@ -19,8 +19,22 @@ MainView {
         onSaved: {
             message.visible = true;
             if (success) {
-                message.text = i18n.tr("Saved the settings, please reboot");
-                message.color = UbuntuColors.green;
+                if (!settings.apiKey) {
+                    message.text = i18n.tr("Please specify an api key");
+                    message.color = UbuntuColors.orange;
+                }
+                else if (!settings.lat) {
+                    message.text = i18n.tr("Please specify the latitude");
+                    message.color = UbuntuColors.orange;
+                }
+                else if (!settings.lng) {
+                    message.text = i18n.tr("Please specify the longitude");
+                    message.color = UbuntuColors.orange;
+                }
+                else {
+                    message.text = i18n.tr("Saved the settings, please reboot");
+                    message.color = UbuntuColors.green;
+                }
             }
             else {
                 message.text = i18n.tr("Failed to save the settings");
