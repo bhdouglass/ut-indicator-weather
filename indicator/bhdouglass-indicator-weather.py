@@ -115,15 +115,18 @@ class WeatherIndicator(object):
 
     def current_action_activated(self, action, data):
         print('current_action_activated')
-        subprocess.check_call(shlex.split('ubuntu-app-launch webbrowser-app https://darksky.net/forecast/{},{}'.format(self.lat, self.lng)))
+        subprocess.Popen(shlex.split('ubuntu-app-launch webbrowser-app https://darksky.net/forecast/{},{}'.format(self.lat, self.lng)))
+        print('end')
 
     def forecast_action_activated(self, action, data):
         print('forecast_action_activated')
-        subprocess.check_call(shlex.split('ubuntu-app-launch webbrowser-app https://darksky.net/forecast/{},{}'.format(self.lat, self.lng)))
+        subprocess.Popen(shlex.split('ubuntu-app-launch webbrowser-app https://darksky.net/forecast/{},{}'.format(self.lat, self.lng)))
+        print('end')
 
     def settings_action_activated(self, action, data):
         print('settings_action_activated')
-        subprocess.check_call(shlex.split('ubuntu-app-launch indicator-weather.bhdouglass_indicator-weather'))
+        subprocess.Popen(shlex.split('ubuntu-app-launch indicator-weather.bhdouglass_indicator-weather_@VERSION@'))
+        print('end')
 
     def _setup_actions(self):
         root_action = Gio.SimpleAction.new_stateful(self.ROOT_ACTION, None, self.root_state())

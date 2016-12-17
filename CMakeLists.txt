@@ -2,6 +2,7 @@ project(indicator-weather C CXX)
 cmake_minimum_required(VERSION 3.0.0)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+set(VERSION "1.12")
 
 find_package(Qt5Core)
 find_package(Qt5Qml)
@@ -38,6 +39,6 @@ install(FILES ${DESKTOP_FILE_NAME} DESTINATION ${DESKTOP_DIR})
 install(FILES "indicator-weather.apparmor" DESTINATION ${DATA_DIR})
 install(DIRECTORY qml DESTINATION ${DATA_DIR})
 install(DIRECTORY assets DESTINATION ${DATA_DIR})
-install(DIRECTORY indicator DESTINATION ${DATA_DIR})
 
 add_subdirectory(plugins)
+add_subdirectory(indicator)
