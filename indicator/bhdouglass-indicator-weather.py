@@ -4,6 +4,7 @@ import json
 import urllib.request
 import subprocess
 import shlex
+import logging
 
 from gi.repository import Gio
 from gi.repository import GLib
@@ -12,7 +13,12 @@ BUS_NAME = 'com.bhdouglass.indicator.weather'
 BUS_OBJECT_PATH = '/com/bhdouglass/indicator/weather'
 BUS_OBJECT_PATH_PHONE = BUS_OBJECT_PATH + '/phone'
 
-# TODO setup logger with timestamps
+logger = logging.getLogger()
+handler = logging.StreamHandler()
+formatter = logging.Formatter('%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logger.setLevel(logging.DEBUG)
 
 
 class WeatherIndicator(object):
@@ -96,7 +102,7 @@ class WeatherIndicator(object):
             try:
                 config_json = json.load(f)
             except:
-                print('Failed to load the config file: {}'.format(str(sys.exc_info()[0])))
+                logger.warning('Failed to load the config file: {}'.format(str(sys.exc_info()[1])))
 
             if 'api_key' in config_json:
                 self.api_key = config_json['api_key'].strip()
@@ -114,19 +120,17 @@ class WeatherIndicator(object):
             self.unit = 'f'
 
     def current_action_activated(self, action, data):
-        print('current_action_activated')
+        logger.debug('current_action_activated')
         subprocess.Popen(shlex.split('ubuntu-app-launch webbrowser-app https://darksky.net/forecast/{},{}'.format(self.lat, self.lng)))
-        print('end')
 
     def forecast_action_activated(self, action, data):
-        print('forecast_action_activated')
+        logger.debug('forecast_action_activated')
         subprocess.Popen(shlex.split('ubuntu-app-launch webbrowser-app https://darksky.net/forecast/{},{}'.format(self.lat, self.lng)))
-        print('end')
 
     def settings_action_activated(self, action, data):
-        print('settings_action_activated')
+        logger.debug('settings_action_activated')
+        # For some readon ubuntu-app-launch hangs without thr version, so let cmake set it for us
         subprocess.Popen(shlex.split('ubuntu-app-launch indicator-weather.bhdouglass_indicator-weather_@VERSION@'))
-        print('end')
 
     def _setup_actions(self):
         root_action = Gio.SimpleAction.new_stateful(self.ROOT_ACTION, None, self.root_state())
@@ -172,39 +176,49 @@ class WeatherIndicator(object):
         self.sub_menu.remove(self.MAIN_SECTION)
         self.sub_menu.insert_section(self.MAIN_SECTION, 'Weather', self._create_section())
 
-    def update_weather(self):
-        print('Updating weather')
+    def update_weather(self):  # TODO add a timer to redo when errors happen
+        logger.debug('Updating weather')
 
         units = 'us'
         if self.unit == 'c' or self.unit == 'k':
             units = 'si'
 
         url = 'https://api.darksky.net/forecast/{}/{},{}?units={}'.format(self.api_key, self.lat, self.lng, units)
-        response = urllib.request.urlopen(url)
+        response = None
+        try:
+            response = urllib.request.urlopen(url)
+        except:
+            logger.error('Failed to response from the api: {}'.format(str(sys.exc_info()[1])))
+
         if response:
-            data = None
-            try:
-                data = json.loads(response.readall().decode('utf-8'))
-            except ValueError:
+            if response.status == 200:
                 data = None
+                try:
+                    data = json.loads(response.readall().decode('utf-8'))
+                except ValueError:
+                    logger.exception('response is not valid json')
+                    data = None
 
-            if data:
-                self.current_temperature = int(data['currently']['temperature'])
-                self.current_condition_icon = self.condition_icon_map[data['currently']['icon']]
-                self.current_condition_text = self.condition_text_map[data['currently']['icon']]
+                if data:
+                    self.current_temperature = int(data['currently']['temperature'])
+                    self.current_condition_icon = self.condition_icon_map[data['currently']['icon']]
+                    self.current_condition_text = self.condition_text_map[data['currently']['icon']]
 
-                if self.unit == 'k':
-                    self.current_temperature += 273
+                    if self.unit == 'k':
+                        self.current_temperature += 273
 
-                print('Updated state to: {}'.format(self.current_state()))
+                    logger.debug('Updated state to: {}'.format(self.current_state()))
 
-                # TODO figure out why this gives off an error
-                self.action_group.change_action_state(self.ROOT_ACTION, self.root_state())
-                self.action_group.change_action_state(self.CURRENT_ACTION, GLib.Variant.new_string(self.current_state()))
-                self._update_menu()
+                    # TODO figure out why this gives off a warning
+                    self.action_group.change_action_state(self.ROOT_ACTION, self.root_state())
+                    self.action_group.change_action_state(self.CURRENT_ACTION, GLib.Variant.new_string(self.current_state()))
+                    self._update_menu()
+
+            else:
+                logger.error('unexpected http status code {}'.format(response.status))
 
         else:
-            pass  # TODO error handling
+            logger.error('no response')
 
         return True  # Make sure we keep running the timeout
 
@@ -229,7 +243,7 @@ class WeatherIndicator(object):
 
         return vardict.end()
 
-    def current_state(self):
+    def current_state(self):  # TODO error state
         return '{} and {}°'.format(self.current_condition_text, self.current_temperature)
 
 
@@ -238,11 +252,11 @@ if __name__ == '__main__':
     proxy = Gio.DBusProxy.new_sync(bus, 0, None, 'org.freedesktop.DBus', '/org/freedesktop/DBus', 'org.freedesktop.DBus', None)
     result = proxy.RequestName('(su)', BUS_NAME, 0x4)
     if result != 1:
-        print('Error: Bus name is already taken')
+        logger.critical('Error: Bus name is already taken')
         sys.exit(1)
 
     wi = WeatherIndicator(bus)
     wi.run()
 
-    print('Weather indicator started')
+    logger.debug('Weather indicator started')
     GLib.MainLoop().run()
