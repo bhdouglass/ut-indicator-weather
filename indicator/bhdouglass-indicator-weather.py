@@ -66,6 +66,7 @@ class WeatherIndicator(object):
         'tornado': SEVERE,
     }
 
+    # TODO translate these
     condition_text_map = {
         'clear-day': 'Clear',
         'clear-night': 'Clear',
@@ -86,6 +87,7 @@ class WeatherIndicator(object):
     lat = ''
     lng = ''
     unit = 'f'
+    retry_timeout = 1
 
     def __init__(self, bus):
         self.bus = bus
@@ -178,7 +180,7 @@ class WeatherIndicator(object):
         self.sub_menu.remove(self.MAIN_SECTION)
         self.sub_menu.insert_section(self.MAIN_SECTION, 'Weather', self._create_section())
 
-    def update_weather(self):  # TODO add a timer to redo when errors happen
+    def update_weather(self):  # TODO see if the network status can be checked/watched
         logger.debug('Updating weather')
         self.error = ''
 
@@ -226,7 +228,25 @@ class WeatherIndicator(object):
         self.action_group.change_action_state(self.CURRENT_ACTION, GLib.Variant.new_string(self.current_state()))
         self._update_menu()
 
+        if self.error:
+            self.retry_timeout = 1
+            GLib.timeout_add_seconds(60 * self.retry_timeout, self.retry)
+
         return True  # Make sure we keep running the timeout
+
+    def retry(self):
+        logger.debug('retrying weather update after an error')
+
+        self.update_weather()
+        if self.error:
+            self.retry_timeout += 1
+
+            if self.retry_timeout >= 15:
+                self.retry_timeout = 15
+
+            GLib.timeout_add_seconds(60 * self.retry_timeout, self.update_weather)
+
+        return False  # Don't let the timeout continue to run as we do an incremental backoff
 
     def run(self):
         self._setup_actions()
