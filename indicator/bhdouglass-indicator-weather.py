@@ -27,6 +27,7 @@ class WeatherIndicator(object):
     FORECAST_ACTION = 'open-forecast-app'
     SETTINGS_ACTION = 'settings'
     MAIN_SECTION = 0
+    ERROR_ICON = 'sync-error'
 
     RAIN = 'weather-chance-of-rain'
     SNOW = 'weather-chance-of-snow'
@@ -95,6 +96,7 @@ class WeatherIndicator(object):
         self.current_condition_icon = self.CLEAR
         self.current_condition_text = 'Clear'
         self.current_temperature = 75
+        self.error = 'No weather data yet'
 
         config_file = "/home/phablet/.config/indicator-weather.bhdouglass/config.json"  # TODO don't hardcode this
         with open(config_file, 'r') as f:
@@ -152,7 +154,7 @@ class WeatherIndicator(object):
         section = Gio.Menu()
 
         current_menu_item = Gio.MenuItem.new(self.current_state(), 'indicator.{}'.format(self.CURRENT_ACTION))
-        icon = Gio.ThemedIcon.new_with_default_fallbacks(self.current_condition_icon)
+        icon = Gio.ThemedIcon.new_with_default_fallbacks(self.current_icon())
         current_menu_item.set_attribute_value('icon', icon.serialize())
         section.append_item(current_menu_item)
 
@@ -178,6 +180,7 @@ class WeatherIndicator(object):
 
     def update_weather(self):  # TODO add a timer to redo when errors happen
         logger.debug('Updating weather')
+        self.error = ''
 
         units = 'us'
         if self.unit == 'c' or self.unit == 'k':
@@ -188,7 +191,8 @@ class WeatherIndicator(object):
         try:
             response = urllib.request.urlopen(url)
         except:
-            logger.error('Failed to response from the api: {}'.format(str(sys.exc_info()[1])))
+            self.error = 'Error fetching weather'
+            logger.error('Failed to get response from the api: {}'.format(str(sys.exc_info()[1])))
 
         if response:
             if response.status == 200:
@@ -196,6 +200,7 @@ class WeatherIndicator(object):
                 try:
                     data = json.loads(response.readall().decode('utf-8'))
                 except ValueError:
+                    self.error = 'Error fetching weather'
                     logger.exception('response is not valid json')
                     data = None
 
@@ -207,18 +212,19 @@ class WeatherIndicator(object):
                     if self.unit == 'k':
                         self.current_temperature += 273
 
-                    logger.debug('Updated state to: {}'.format(self.current_state()))
-
-                    # TODO figure out why this gives off a warning
-                    self.action_group.change_action_state(self.ROOT_ACTION, self.root_state())
-                    self.action_group.change_action_state(self.CURRENT_ACTION, GLib.Variant.new_string(self.current_state()))
-                    self._update_menu()
-
             else:
+                self.error = 'Error fetching weather'
                 logger.error('unexpected http status code {}'.format(response.status))
 
         else:
+            self.error = 'Error fetching weather'
             logger.error('no response')
+
+        logger.debug('Updated state to: {}'.format(self.current_state()))
+        # TODO figure out why this gives off a warning
+        self.action_group.change_action_state(self.ROOT_ACTION, self.root_state())
+        self.action_group.change_action_state(self.CURRENT_ACTION, GLib.Variant.new_string(self.current_state()))
+        self._update_menu()
 
         return True  # Make sure we keep running the timeout
 
@@ -236,15 +242,30 @@ class WeatherIndicator(object):
         vardict = GLib.VariantDict.new()
         vardict.insert_value('visible', GLib.Variant.new_boolean(True))
         vardict.insert_value('title', GLib.Variant.new_string('Weather'))
-        vardict.insert_value('label', GLib.Variant.new_string(str(self.current_temperature) + '°'))
 
-        icon = Gio.ThemedIcon.new(self.current_condition_icon)
+        temperature = str(self.current_temperature) + '°'
+        if self.error:
+            temperature = ''
+
+        vardict.insert_value('label', GLib.Variant.new_string(temperature))
+        icon = Gio.ThemedIcon.new(self.current_icon())
         vardict.insert_value('icon', icon.serialize())
 
         return vardict.end()
 
-    def current_state(self):  # TODO error state
-        return '{} and {}°'.format(self.current_condition_text, self.current_temperature)
+    def current_state(self):
+        state = '{} and {}°'.format(self.current_condition_text, self.current_temperature)
+        if self.error:
+            state = self.error
+
+        return state
+
+    def current_icon(self):
+        icon = self.current_condition_icon
+        if self.error:
+            icon = self.ERROR_ICON
+
+        return icon
 
 
 if __name__ == '__main__':
