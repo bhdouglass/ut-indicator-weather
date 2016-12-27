@@ -6,6 +6,11 @@ on the Ubuntu Touch indicator bar.
 
 [Get it on the OpenStore.](https://open.uappexplorer.com/app/indicator-weather.bhdouglass)
 
+## Translating
+
+If you are interested in translating indicator weather, head over to our
+[Launchpad page for translations](https://translations.launchpad.net/ut-indicator-weather).
+
 ## About the Indicator
 
 The indicator itself is rather simle. It's a python script that exports a Gtk

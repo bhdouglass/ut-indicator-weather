@@ -26,7 +26,8 @@ add_custom_target(${POT_FILE} ALL
 foreach(PO_FILE ${PO_FILES})
     get_filename_component(LANG ${PO_FILE} NAME_WE)
     gettext_process_po_files(${LANG} ALL PO_FILES ${PO_FILE})
-    set(INSTALL_DIR ${CMAKE_INSTALL_LOCALEDIR}/${LANG}/LC_MESSAGES)
+    string(REPLACE "indicator-weather-" "" SHORT_LANG ${LANG})
+    set(INSTALL_DIR ${CMAKE_INSTALL_LOCALEDIR}/share/locale/${SHORT_LANG}/LC_MESSAGES)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${LANG}.gmo
             DESTINATION ${INSTALL_DIR}
             RENAME ${DOMAIN}.mo)
