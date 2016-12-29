@@ -14,8 +14,8 @@ add_custom_target(${POT_FILE} ALL
         -D ${CMAKE_CURRENT_SOURCE_DIR}
         -D ${CMAKE_CURRENT_BINARY_DIR}
         --from-code=UTF-8
-        --c++ --qt --add-comments=TRANSLATORS
-        --keyword=tr --keyword=tr:1,2 --keyword=N_
+        --c++ --qt --language=python --add-comments=TRANSLATORS
+        --keyword=tr --keyword=tr:1,2 --keyword=N_ --keyword=_
         --package-name='indicator-weather.bhdouglass'
         --copyright-holder='Brian Douglass'
         ${I18N_SRC_FILES}

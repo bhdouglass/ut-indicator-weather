@@ -9,6 +9,10 @@ import logging
 from gi.repository import Gio
 from gi.repository import GLib
 
+import gettext
+t = gettext.translation('indicator-weather', fallback=True, localedir='/opt/click.ubuntu.com/indicator-weather.bhdouglass/current/share/locale/')  # TODO don't hardcode this
+_ = t.gettext
+
 BUS_NAME = 'com.bhdouglass.indicator.weather'
 BUS_OBJECT_PATH = '/com/bhdouglass/indicator/weather'
 BUS_OBJECT_PATH_PHONE = BUS_OBJECT_PATH + '/phone'
@@ -66,23 +70,6 @@ class WeatherIndicator(object):
         'tornado': SEVERE,
     }
 
-    # TODO translate these
-    condition_text_map = {
-        'clear-day': 'Clear',
-        'clear-night': 'Clear',
-        'rain': 'Rainy',
-        'snow': 'Snowy',
-        'sleet': 'Sleet',
-        'wind': 'Windy',
-        'fog': 'Foggy',
-        'cloudy': 'Cloudy',
-        'partly-cloudy-day': 'Cloudy',
-        'partly-cloudy-night': 'Cloudy',
-        'hail': 'Hail',
-        'thunderstorm': 'Stormy',
-        'tornado': 'Tornado',
-    }
-
     api_key = ''
     lat = ''
     lng = ''
@@ -90,6 +77,8 @@ class WeatherIndicator(object):
     retry_timeout = 1
 
     def __init__(self, bus):
+        self.translate()
+
         self.bus = bus
         self.action_group = Gio.SimpleActionGroup()
         self.menu = Gio.Menu()
@@ -122,6 +111,23 @@ class WeatherIndicator(object):
 
         if self.unit != 'f' and self.unit != 'c' and self.unit != 'k':
             self.unit = 'f'
+
+    def translate(self):
+        self.condition_text_map = {
+            'clear-day': _('Clear'),
+            'clear-night': _('Clear'),
+            'rain': _('Rainy'),
+            'snow': _('Snowy'),
+            'sleet': _('Sleet'),
+            'wind': _('Windy'),
+            'fog': _('Foggy'),
+            'cloudy': _('Cloudy'),
+            'partly-cloudy-day': _('Cloudy'),
+            'partly-cloudy-night': _('Cloudy'),
+            'hail': _('Hail'),
+            'thunderstorm': _('Stormy'),
+            'tornado': _('Tornado'),
+        }
 
     def current_action_activated(self, action, data):
         logger.debug('current_action_activated')
@@ -160,10 +166,10 @@ class WeatherIndicator(object):
         current_menu_item.set_attribute_value('icon', icon.serialize())
         section.append_item(current_menu_item)
 
-        settings_menu_item = Gio.MenuItem.new('Forecast', 'indicator.{}'.format(self.FORECAST_ACTION))
+        settings_menu_item = Gio.MenuItem.new(_('Forecast'), 'indicator.{}'.format(self.FORECAST_ACTION))
         section.append_item(settings_menu_item)
 
-        settings_menu_item = Gio.MenuItem.new('Weather Settings', 'indicator.{}'.format(self.SETTINGS_ACTION))
+        settings_menu_item = Gio.MenuItem.new(_('Weather Settings'), 'indicator.{}'.format(self.SETTINGS_ACTION))
         section.append_item(settings_menu_item)
 
         return section
@@ -184,6 +190,8 @@ class WeatherIndicator(object):
         logger.debug('Updating weather')
         self.error = ''
 
+        self.translate()
+
         units = 'us'
         if self.unit == 'c' or self.unit == 'k':
             units = 'si'
@@ -193,7 +201,7 @@ class WeatherIndicator(object):
         try:
             response = urllib.request.urlopen(url)
         except:
-            self.error = 'Error fetching weather'
+            self.error = _('Error fetching weather')
             logger.error('Failed to get response from the api: {}'.format(str(sys.exc_info()[1])))
 
         if response:
@@ -202,7 +210,7 @@ class WeatherIndicator(object):
                 try:
                     data = json.loads(response.readall().decode('utf-8'))
                 except ValueError:
-                    self.error = 'Error fetching weather'
+                    self.error = _('Error fetching weather')
                     logger.exception('response is not valid json')
                     data = None
 
@@ -215,11 +223,11 @@ class WeatherIndicator(object):
                         self.current_temperature += 273
 
             else:
-                self.error = 'Error fetching weather'
+                self.error = _('Error fetching weather')
                 logger.error('unexpected http status code {}'.format(response.status))
 
         else:
-            self.error = 'Error fetching weather'
+            self.error = _('Error fetching weather')
             logger.error('no response')
 
         logger.debug('Updated state to: {}'.format(self.current_state()))
@@ -274,7 +282,12 @@ class WeatherIndicator(object):
         return vardict.end()
 
     def current_state(self):
-        state = '{} and {}°'.format(self.current_condition_text, self.current_temperature)
+        # TRANSLATORS You must ensure that both {condition} and {temperature} remain intact as they are used for replacing with the actual values. For example: Clear and 75°
+        template = _('{condition} and {temperature}°')
+        if '{condition}' not in template or '{temperature}' not in template:
+            template = '{condition} and {temperature}°'  # Ensure that a bad translation doesn't throw us off
+
+        state = template.format(condition=self.current_condition_text, temperature=self.current_temperature)
         if self.error:
             state = self.error
 
