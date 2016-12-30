@@ -2,7 +2,6 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
 import Indicator 1.0
-import com.ubuntu.PamAuthentication 0.1
 
 MainView {
     id: root
@@ -255,13 +254,7 @@ MainView {
                     text: i18n.tr("Uninstall Indicator")
                     onClicked: {
                         message.visible = false;
-
-                        if (Indicator.isInstalledSystem) {
-                            pam.displayLoginDialog();
-                        }
-                        else {
-                            Indicator.uninstall();
-                        }
+                        Indicator.uninstall();
                     }
                 }
 
@@ -270,15 +263,6 @@ MainView {
                     visible: false
                 }
             }
-        }
-    }
-
-    AuthenticationService {
-        id: pam
-        serviceName: 'indicator-weather'
-        onDenied: Qt.quit();
-        onGranted: {
-            Indicator.uninstall(pam.password);
         }
     }
 

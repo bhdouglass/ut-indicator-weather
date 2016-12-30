@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: indicator-weather.bhdouglass\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-29 05:35+0000\n"
+"POT-Creation-Date: 2016-12-30 01:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,87 +17,87 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:23
+#: ../qml/Main.qml:22
 msgid "Please specify an api key"
 msgstr ""
 
-#: ../qml/Main.qml:27
+#: ../qml/Main.qml:26
 msgid "Please specify the latitude"
 msgstr ""
 
-#: ../qml/Main.qml:31
+#: ../qml/Main.qml:30
 msgid "Please specify the longitude"
 msgstr ""
 
-#: ../qml/Main.qml:35
+#: ../qml/Main.qml:34
 msgid "Saved the settings, please reboot"
 msgstr ""
 
-#: ../qml/Main.qml:40
+#: ../qml/Main.qml:39
 msgid "Failed to save the settings"
 msgstr ""
 
-#: ../qml/Main.qml:55
+#: ../qml/Main.qml:54
 msgid "Indicator Weather"
 msgstr ""
 
-#: ../qml/Main.qml:92
+#: ../qml/Main.qml:91
 msgid "Dark Sky API Key"
 msgstr ""
 
-#: ../qml/Main.qml:106
+#: ../qml/Main.qml:105
 msgid "Click to signup for an API key"
 msgstr ""
 
-#: ../qml/Main.qml:116
+#: ../qml/Main.qml:115
 msgid "Latitude"
 msgstr ""
 
-#: ../qml/Main.qml:130
+#: ../qml/Main.qml:129
 msgid "Longitude"
 msgstr ""
 
-#: ../qml/Main.qml:144
+#: ../qml/Main.qml:143
 msgid "Temperature Unit"
 msgstr ""
 
-#: ../qml/Main.qml:167
+#: ../qml/Main.qml:166
 msgid "Fahrenheit"
 msgstr ""
 
-#: ../qml/Main.qml:195
+#: ../qml/Main.qml:194
 msgid "Celsius"
 msgstr ""
 
-#: ../qml/Main.qml:223
+#: ../qml/Main.qml:222
 msgid "Kelvin"
 msgstr ""
 
-#: ../qml/Main.qml:233
+#: ../qml/Main.qml:232
 msgid "Save"
 msgstr ""
 
-#: ../qml/Main.qml:244
+#: ../qml/Main.qml:243
 msgid "Install Indicator"
 msgstr ""
 
-#: ../qml/Main.qml:255
+#: ../qml/Main.qml:254
 msgid "Uninstall Indicator"
 msgstr ""
 
-#: ../qml/Main.qml:291
+#: ../qml/Main.qml:275
 msgid "Successfully installed, please reboot"
 msgstr ""
 
-#: ../qml/Main.qml:295
+#: ../qml/Main.qml:279
 msgid "Failed to install"
 msgstr ""
 
-#: ../qml/Main.qml:303
+#: ../qml/Main.qml:287
 msgid "Successfully uninstalled, please reboot"
 msgstr ""
 
-#: ../qml/Main.qml:307
+#: ../qml/Main.qml:291
 msgid "Failed to uninstall"
 msgstr ""
 

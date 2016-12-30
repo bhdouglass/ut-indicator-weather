@@ -2,7 +2,7 @@ project(indicator-weather C CXX)
 cmake_minimum_required(VERSION 3.0.0)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-set(VERSION "1.15")
+set(VERSION "1.16")
 
 find_package(Qt5Core)
 find_package(Qt5Qml)
@@ -54,6 +54,9 @@ endif()
 add_custom_target(${DESKTOP_FILE_NAME} ALL
     COMMENT "Merging translations into ${DESKTOP_FILE_NAME}..."
     COMMAND LC_ALL=C ${INTLTOOL_MERGE} -d -u ${CMAKE_SOURCE_DIR}/po ${CMAKE_SOURCE_DIR}/${DESKTOP_FILE_NAME}.in ${DESKTOP_FILE_NAME}
+
+    # TODO see if there is a better way to do this
+    COMMAND sed -i 's/indicator-weather-//g' ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE_NAME}
 )
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE_NAME} DESTINATION ${DATA_DIR})
