@@ -18,7 +18,10 @@ MainView {
         onSaved: {
             message.visible = true;
             if (success) {
-                if (!settings.apiKey) {
+                if (
+                    (!settings.darkSkyApiKey && settings.provider == 'dark_sky') ||
+                    (!settings.owmApiKey && settings.provider == 'open_weather_map')
+                ) {
                     message.text = i18n.tr("Please specify an api key");
                     message.color = UbuntuColors.orange;
                 }
@@ -39,12 +42,6 @@ MainView {
                 message.text = i18n.tr("Failed to save the settings");
                 message.color = UbuntuColors.red;
             }
-        }
-    }
-
-    function checkCheckboxes() {
-        if (!fahrenheit.checked && !celsius.checked && !kelvin.checked) {
-            fahrenheit.checked = true;
         }
     }
 
@@ -75,7 +72,17 @@ MainView {
                 }
                 spacing: units.gu(1)
 
+                WeatherProviderSelect {
+                    settings: settings
+                    Layout.fillWidth: true
+                }
+
+                Rectangle { // Spacer
+                    Layout.preferredHeight: units.gu(1)
+                }
+
                 Image {
+                    visible: settings.provider == 'dark_sky'
                     source: "../assets/darksky.png"
 
                     MouseArea {
@@ -88,27 +95,50 @@ MainView {
                 }
 
                 Label {
+                    visible: settings.provider == 'dark_sky'
                     text: i18n.tr("Dark Sky API Key")
                     Layout.fillWidth: true
                 }
 
                 TextField {
-                    id: apiKey
-                    text: settings.apiKey
+                    visible: settings.provider == 'dark_sky'
+                    id: darkSkyApiKey
+                    text: settings.darkSkyApiKey
 
                     onTextChanged: {
-                        settings.apiKey = text;
+                        settings.darkSkyApiKey = text;
                     }
                 }
 
                 Label {
+                    visible: settings.provider == 'open_weather_map'
+                    text: i18n.tr("OpenWeatherMap API Key")
+                    Layout.fillWidth: true
+                }
+
+                TextField {
+                    visible: settings.provider == 'open_weather_map'
+                    id: owmApiKey
+                    text: settings.owmApiKey
+
+                    onTextChanged: {
+                        settings.owmApiKey = text;
+                    }
+                }
+
+                Label {
+                    visible: settings.provider == 'open_weather_map'
                     text: i18n.tr("Click to signup for an API key")
                     color: 'blue'
 
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: Qt.openUrlExternally('https://darksky.net/dev/')
+                        onClicked: Qt.openUrlExternally('https://openweathermap.org/appid')
                     }
+                }
+
+                Rectangle { // Spacer
+                    Layout.preferredHeight: units.gu(1)
                 }
 
                 Label {
@@ -139,93 +169,17 @@ MainView {
                     }
                 }
 
-                Label {
-                    text: i18n.tr("Temperature Unit")
+                Rectangle { // Spacer
+                    Layout.preferredHeight: units.gu(1)
+                }
+
+                TemperatureUnitSelect {
+                    settings: settings
                     Layout.fillWidth: true
                 }
 
-                RowLayout {
-                    Layout.fillWidth: true
-
-                    CheckBox {
-                        id: fahrenheit
-                        checked: settings.unit == 'f'
-                        onCheckedChanged: {
-                            if (checked) {
-                                settings.unit = 'f';
-                                fahrenheit.checked = true;
-                                celsius.checked = false;
-                                kelvin.checked = false;
-                            }
-
-                            root.checkCheckboxes();
-                        }
-                    }
-
-                    Label {
-                        text: i18n.tr("Fahrenheit")
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: fahrenheit.checked = true;
-                        }
-                    }
-                }
-
-                RowLayout {
-                    Layout.fillWidth: true
-
-                    CheckBox {
-                        id: celsius
-                        checked: settings.unit == 'c'
-                        onCheckedChanged: {
-                            if (checked) {
-                                settings.unit = 'c';
-                                fahrenheit.checked = false;
-                                celsius.checked = true;
-                                kelvin.checked = false;
-                            }
-
-                            root.checkCheckboxes();
-                        }
-                    }
-
-                    Label {
-                        text: i18n.tr("Celsius")
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: celsius.checked = true;
-                        }
-                    }
-                }
-
-                RowLayout {
-                    Layout.fillWidth: true
-
-                    CheckBox {
-                        id: kelvin
-                        checked: settings.unit == 'k'
-                        onCheckedChanged: {
-                            if (checked) {
-                                settings.unit = 'k';
-                                fahrenheit.checked = false;
-                                celsius.checked = false;
-                                kelvin.checked = true;
-                            }
-
-                            root.checkCheckboxes();
-                        }
-                    }
-
-                    Label {
-                        text: i18n.tr("Kelvin")
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: kelvin.checked = true;
-                        }
-                    }
+                Rectangle { // Spacer
+                    Layout.preferredHeight: units.gu(1)
                 }
 
                 Button {

@@ -51,10 +51,11 @@ class WeatherIndicator(object):
     SCATTERED_SHOWERS = 'weather-showers-scattered-symbolic'
     SHOWERS = 'weather-showers-symbolic'
     SLEET = 'weather-sleet-symbolic'
+    HAIL = 'weather-sleet-symbolic'
     SNOW = 'weather-snow-symbolic'
     STORM = 'weather-storm-symbolic'
 
-    condition_icon_map = {
+    dark_sky_condition_icon_map = {
         'clear-day': CLEAR,
         'clear-night': CLEAR_NIGHT,
         'rain': RAIN,
@@ -65,19 +66,22 @@ class WeatherIndicator(object):
         'cloudy': CLOUDY,
         'partly-cloudy-day': CLOUDY,
         'partly-cloudy-night': CLOUDY_NIGHT,
-        'hail': SLEET,
+        'hail': HAIL,
         'thunderstorm': STORM,
         'tornado': SEVERE,
     }
 
-    api_key = ''
+    config_file = "/home/phablet/.config/indicator-weather.bhdouglass/config.json"  # TODO don't hardcode this
+    provider = 'dark_sky'
+    dark_sky_api_key = ''
+    owm_api_key = ''
     lat = ''
     lng = ''
     unit = 'f'
     retry_timeout = 1
 
     def __init__(self, bus):
-        self.translate()
+        self.get_config()
 
         self.bus = bus
         self.action_group = Gio.SimpleActionGroup()
@@ -89,16 +93,22 @@ class WeatherIndicator(object):
         self.current_temperature = 75
         self.error = 'No weather data yet'
 
-        config_file = "/home/phablet/.config/indicator-weather.bhdouglass/config.json"  # TODO don't hardcode this
-        with open(config_file, 'r') as f:
+    def get_config(self):
+        with open(self.config_file, 'r') as f:
             config_json = {}
             try:
                 config_json = json.load(f)
             except:
                 logger.warning('Failed to load the config file: {}'.format(str(sys.exc_info()[1])))
 
+            if 'provider' in config_json:
+                self.provider = config_json['provider'].strip()
+
             if 'api_key' in config_json:
-                self.api_key = config_json['api_key'].strip()
+                self.dark_sky_api_key = config_json['api_key'].strip()
+
+            if 'owm_api_key' in config_json:
+                self.owm_api_key = config_json['owm_api_key'].strip()
 
             if 'lat' in config_json:
                 self.lat = config_json['lat'].strip()
@@ -112,22 +122,96 @@ class WeatherIndicator(object):
         if self.unit != 'f' and self.unit != 'c' and self.unit != 'k':
             self.unit = 'f'
 
-    def translate(self):
-        self.condition_text_map = {
-            'clear-day': _('Clear'),
-            'clear-night': _('Clear'),
-            'rain': _('Rainy'),
-            'snow': _('Snowy'),
-            'sleet': _('Sleet'),
-            'wind': _('Windy'),
-            'fog': _('Foggy'),
-            'cloudy': _('Cloudy'),
-            'partly-cloudy-day': _('Cloudy'),
-            'partly-cloudy-night': _('Cloudy'),
-            'hail': _('Hail'),
-            'thunderstorm': _('Stormy'),
-            'tornado': _('Tornado'),
-        }
+    def get_translation(self, condition):
+        text = ''
+
+        if self.provider == 'dark_sky':
+            condition_text_map = {
+                'clear-day': _('Clear'),
+                'clear-night': _('Clear'),
+                'rain': _('Rainy'),
+                'snow': _('Snowy'),
+                'sleet': _('Sleet'),
+                'wind': _('Windy'),
+                'fog': _('Foggy'),
+                'cloudy': _('Cloudy'),
+                'partly-cloudy-day': _('Cloudy'),
+                'partly-cloudy-night': _('Cloudy'),
+                'hail': _('Hail'),
+                'thunderstorm': _('Stormy'),
+                'tornado': _('Tornado'),
+            }
+
+            if condition in condition_text_map:
+                text = condition_text_map[condition]
+        else:
+            if condition == 800 or condition == 951:  # Clear/Calm
+                text = _('Clear')
+            elif condition > 800 and condition < 900:  # Clouds
+                text = _('Cloudy')
+            elif condition >= 700 and condition < 800:  # Atmosphere (mist, fog, etc)
+                text = _('Foggy')
+            elif condition >= 300 and condition < 400:  # Drizzle
+                text = _('Rainy')
+            elif condition >= 500 and condition < 600:  # Rain
+                text = _('Rainy')
+            elif condition >= 200 and condition < 300:  # Thunderstorm
+                text = _('Stormy')
+            elif condition >= 600 and condition < 700:  # Snow
+                text = _('Snowy')
+            elif condition == 906:  # Hail
+                text = _('Hail')
+            elif condition >= 907 and condition < 957:  # Wind
+                text = _('Windy')
+            elif condition == 905 or (condition >= 957 and condition < 1000):  # Extreme Wind
+                text = _('Windy')
+            elif condition == 900:  # Tornado
+                text = _('Tornado')
+            elif condition == 901 or condition == 902 or condition == 962:  # Hurricane
+                text = _('Hurricane')
+            elif condition == 903:  # Extreme cold
+                text = _('Extreme Cold')
+            elif condition == 904:  # Extreme heat
+                text = _('Extreme Heat')
+
+        return text
+
+    def get_icon(self, condition):
+        icon = self.ERROR_ICON
+        if self.provider == 'dark_sky':
+            if condition in self.dark_sky_condition_icon_map:
+                icon = self.dark_sky_condition_icon_map[condition]
+        else:
+            if condition == 800 or condition == 951:  # Clear/Calm
+                icon = self.CLEAR
+            elif condition > 800 and condition < 900:  # Clouds
+                icon = self.CLOUDY
+            elif condition >= 700 and condition < 800:  # Atmosphere (mist, fog, etc)
+                icon = self.FOG
+            elif condition >= 300 and condition < 400:  # Drizzle
+                icon = self.RAIN
+            elif condition >= 500 and condition < 600:  # Rain
+                icon = self.RAIN
+            elif condition >= 200 and condition < 300:  # Thunderstorm
+                icon = self.STROM
+            elif condition >= 600 and condition < 700:  # Snow
+                icon = self.SNOW
+            elif condition == 906:  # Hail
+                icon = self.HAIL
+            elif condition >= 907 and condition < 957:  # Wind
+                icon = self.CHANCE_WIND
+            elif condition == 905 or (condition >= 957 and condition < 1000):  # Extreme Wind
+                icon = self.CHANCE_WIND
+            elif condition == 900:  # Tornado
+                icon = self.SEVERE
+            elif condition == 901 or condition == 902 or condition == 962:  # Hurricane
+                icon = self.SEVERE
+            elif condition == 903:  # Extreme cold
+                icon = self.SEVERE
+            elif condition == 904:  # Extreme heat
+                icon = self.SEVERE
+
+        return icon
 
     def current_action_activated(self, action, data):
         logger.debug('current_action_activated')
@@ -139,7 +223,7 @@ class WeatherIndicator(object):
 
     def settings_action_activated(self, action, data):
         logger.debug('settings_action_activated')
-        # For some readon ubuntu-app-launch hangs without thr version, so let cmake set it for us
+        # For some reason ubuntu-app-launch hangs without the version, so let cmake set it for us
         subprocess.Popen(shlex.split('ubuntu-app-launch indicator-weather.bhdouglass_indicator-weather_@VERSION@'))
 
     def _setup_actions(self):
@@ -187,48 +271,101 @@ class WeatherIndicator(object):
         self.sub_menu.insert_section(self.MAIN_SECTION, 'Weather', self._create_section())
 
     def update_weather(self):  # TODO see if the network status can be checked/watched
-        logger.debug('Updating weather')
+        logger.debug('Updating weather using provider: {}'.format(self.provider))
         self.error = ''
 
-        self.translate()
+        self.get_config()
 
         units = 'us'
         if self.unit == 'c' or self.unit == 'k':
             units = 'si'
 
-        url = 'https://api.darksky.net/forecast/{}/{},{}?units={}'.format(self.api_key, self.lat, self.lng, units)
-        response = None
-        try:
-            response = urllib.request.urlopen(url)
-        except:
-            self.error = _('Error fetching weather')
-            logger.error('Failed to get response from the api: {}'.format(str(sys.exc_info()[1])))
+        if (not self.dark_sky_api_key and self.provider == 'dark_sky') or (not self.owm_api_key and self.provider == 'open_weather_map'):
+            self.error = _('Please specify an api key')
+            logger.error('no api key')
+        elif not self.lat:
+            self.error = _('Please specify the latitude')
+            logger.error('no latitude')
+        elif not self.lng:
+            self.error = _('Please specify the longitude')
+            logger.error('no longitude')
+        else:
+            if self.provider == 'dark_sky':
+                units = 'us'
+                if self.unit == 'c' or self.unit == 'k':
+                    units = 'si'
 
-        if response:
-            if response.status == 200:
-                data = None
+                url = 'https://api.darksky.net/forecast/{}/{},{}?units={}'.format(self.dark_sky_api_key, self.lat, self.lng, units)
+                response = None
                 try:
-                    data = json.loads(response.readall().decode('utf-8'))
-                except ValueError:
+                    response = urllib.request.urlopen(url)
+                except:
                     self.error = _('Error fetching weather')
-                    logger.exception('response is not valid json')
-                    data = None
+                    logger.exception('Failed to get response from the api: {}'.format(str(sys.exc_info()[1])))
 
-                if data:
-                    self.current_temperature = int(data['currently']['temperature'])
-                    self.current_condition_icon = self.condition_icon_map[data['currently']['icon']]
-                    self.current_condition_text = self.condition_text_map[data['currently']['icon']]
+                if response:
+                    if response.status == 200:
+                        data = None
+                        try:
+                            data = json.loads(response.readall().decode('utf-8'))
+                        except ValueError:
+                            self.error = _('Error fetching weather')
+                            logger.exception('response is not valid json')
+                            data = None
 
-                    if self.unit == 'k':
-                        self.current_temperature += 273
+                        if data:
+                            self.current_temperature = int(data['currently']['temperature'])
+                            self.current_condition_icon = self.get_icon(data['currently']['icon'])
+                            self.current_condition_text = self.get_translation(data['currently']['icon'])
+
+                            if self.unit == 'k':
+                                self.current_temperature += 273
+
+                    else:
+                        self.error = _('Error fetching weather')
+                        logger.error('unexpected http status code {}'.format(response.status))
+
+                else:
+                    self.error = _('Error fetching weather')
+                    logger.error('no response')
 
             else:
-                self.error = _('Error fetching weather')
-                logger.error('unexpected http status code {}'.format(response.status))
+                units = ''
+                if self.unit == 'f':
+                    units = 'imperial'
+                elif self.unit == 'c':
+                    units = 'metric'
 
-        else:
-            self.error = _('Error fetching weather')
-            logger.error('no response')
+                url = 'http://api.openweathermap.org/data/2.5/weather?APPID={}&lat={}&lon={}&units={}'.format(self.owm_api_key, self.lat, self.lng, units)
+                response = None
+                try:
+                    response = urllib.request.urlopen(url)
+                except:
+                    self.error = _('Error fetching weather')
+                    logger.exception('Failed to get response from the api: {}'.format(str(sys.exc_info()[1])))
+
+                if response:
+                    if response.status == 200:
+                        data = None
+                        try:
+                            data = json.loads(response.readall().decode('utf-8'))
+                        except ValueError:
+                            self.error = _('Error fetching weather')
+                            logger.exception('response is not valid json')
+                            data = None
+
+                        if data:
+                            self.current_temperature = int(data['main']['temp'])
+                            self.current_condition_icon = self.get_icon(data['weather'][0]['id'])
+                            self.current_condition_text = self.get_translation(data['weather'][0]['id'])
+
+                    else:
+                        self.error = _('Error fetching weather')
+                        logger.error('unexpected http status code {}'.format(response.status))
+
+                else:
+                    self.error = _('Error fetching weather')
+                    logger.error('no response')
 
         logger.debug('Updated state to: {}'.format(self.current_state()))
         # TODO figure out why this gives off a warning
@@ -312,5 +449,5 @@ if __name__ == '__main__':
     wi = WeatherIndicator(bus)
     wi.run()
 
-    logger.debug('Weather indicator started')
+    logger.debug('Weather Indicator startup completed')
     GLib.MainLoop().run()

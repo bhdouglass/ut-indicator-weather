@@ -11,5 +11,5 @@
     },
     "version": "@VERSION@",
     "maintainer": "Brian Douglass <bhdouglass@gmail.com>",
-    "framework" : "ubuntu-sdk-15.04.7"
+    "framework" : "ubuntu-sdk-15.04.6"
 }
