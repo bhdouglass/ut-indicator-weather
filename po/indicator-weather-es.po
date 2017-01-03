@@ -7,160 +7,203 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ut-indicator-weather\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-12-29 05:35+0000\n"
-"PO-Revision-Date: 2016-12-26 17:21+0000\n"
-"Last-Translator: Sof <Unknown>\n"
+"POT-Creation-Date: 2017-01-03 06:18+0000\n"
+"PO-Revision-Date: 2016-12-30 09:45+0000\n"
+"Last-Translator: Paco Molinero <paco@byasl.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-30 01:36+0000\n"
+"X-Launchpad-Export-Date: 2017-01-03 21:48+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
-#: ../qml/Main.qml:23
+#: ../qml/WeatherProviderSelect.qml:19
+msgid "Weather Provider"
+msgstr ""
+
+#: ../qml/WeatherProviderSelect.qml:41
+msgid "Dark Sky"
+msgstr ""
+
+#: ../qml/WeatherProviderSelect.qml:68
+msgid "OpenWeatherMap"
+msgstr ""
+
+#: ../qml/Main.qml:25 ../indicator/bhdouglass-indicator-weather.py:284
 msgid "Please specify an api key"
-msgstr "Por favor, especifica una clave API"
+msgstr "Especifique una clave API"
 
-#: ../qml/Main.qml:27
+#: ../qml/Main.qml:29 ../indicator/bhdouglass-indicator-weather.py:287
 msgid "Please specify the latitude"
-msgstr "Por favor, especifica una latitud"
+msgstr "Especifique una latitud"
 
-#: ../qml/Main.qml:31
+#: ../qml/Main.qml:33 ../indicator/bhdouglass-indicator-weather.py:290
 msgid "Please specify the longitude"
-msgstr "Por favor, especifica una latitud"
+msgstr "Especifique una longitud"
 
-#: ../qml/Main.qml:35
+#: ../qml/Main.qml:37
 msgid "Saved the settings, please reboot"
-msgstr "Configuración guardada. Por favor, reinicie"
+msgstr "Configuración guardada, reinicie"
 
-#: ../qml/Main.qml:40
+#: ../qml/Main.qml:42
 msgid "Failed to save the settings"
 msgstr "No se pudo guardar la configuración"
 
-#: ../qml/Main.qml:55
+#: ../qml/Main.qml:51
 msgid "Indicator Weather"
 msgstr "Indicador meteorológico"
 
-#: ../qml/Main.qml:92
+#: ../qml/Main.qml:99
 msgid "Dark Sky API Key"
 msgstr "Clave API de Dark Sky"
 
-#: ../qml/Main.qml:106
+#: ../qml/Main.qml:115
+msgid "OpenWeatherMap API Key"
+msgstr ""
+
+#: ../qml/Main.qml:131
 msgid "Click to signup for an API key"
 msgstr "Clic para suscribirse y obtener una clave API"
 
-#: ../qml/Main.qml:116
+#: ../qml/Main.qml:145
 msgid "Latitude"
 msgstr "Latitud"
 
-#: ../qml/Main.qml:130
+#: ../qml/Main.qml:159
 msgid "Longitude"
 msgstr "Longitud"
 
-#: ../qml/Main.qml:144
-msgid "Temperature Unit"
-msgstr "Unidad de temperatura"
-
-#: ../qml/Main.qml:167
-msgid "Fahrenheit"
-msgstr "Fahrenheit"
-
-#: ../qml/Main.qml:195
-msgid "Celsius"
-msgstr "Celsius"
-
-#: ../qml/Main.qml:223
-msgid "Kelvin"
-msgstr "Kelvin"
-
-#: ../qml/Main.qml:233
+#: ../qml/Main.qml:186
 msgid "Save"
 msgstr "Guardar"
 
-#: ../qml/Main.qml:244
+#: ../qml/Main.qml:197
 msgid "Install Indicator"
 msgstr "Indicador de instalación"
 
-#: ../qml/Main.qml:255
+#: ../qml/Main.qml:208
 msgid "Uninstall Indicator"
 msgstr "Indicador de desinstalación"
 
-#: ../qml/Main.qml:291
+#: ../qml/Main.qml:229
 msgid "Successfully installed, please reboot"
-msgstr "Instalado correctamente. Por favor, reinicie"
+msgstr "Instalado correctamente, reinicie"
 
-#: ../qml/Main.qml:295
+#: ../qml/Main.qml:233
 msgid "Failed to install"
 msgstr "Fallo al instalar"
 
-#: ../qml/Main.qml:303
+#: ../qml/Main.qml:241
 msgid "Successfully uninstalled, please reboot"
-msgstr "Correctamente desinstalado. Por favor, reinicie"
+msgstr "Correctamente desinstalado, reinicie"
 
-#: ../qml/Main.qml:307
+#: ../qml/Main.qml:245
 msgid "Failed to uninstall"
 msgstr "Falló la desinstalación"
 
-#: ../indicator/bhdouglass-indicator-weather.py:117
-#: ../indicator/bhdouglass-indicator-weather.py:118
+#: ../qml/TemperatureUnitSelect.qml:19
+msgid "Temperature Unit"
+msgstr "Unidad de temperatura"
+
+#: ../qml/TemperatureUnitSelect.qml:42
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#: ../qml/TemperatureUnitSelect.qml:70
+msgid "Celsius"
+msgstr "Celsius"
+
+#: ../qml/TemperatureUnitSelect.qml:98
+msgid "Kelvin"
+msgstr "Kelvin"
+
+#: ../indicator/bhdouglass-indicator-weather.py:130
+#: ../indicator/bhdouglass-indicator-weather.py:131
+#: ../indicator/bhdouglass-indicator-weather.py:149
 msgid "Clear"
-msgstr ""
+msgstr "Limpiar"
 
-#: ../indicator/bhdouglass-indicator-weather.py:119
+#: ../indicator/bhdouglass-indicator-weather.py:132
+#: ../indicator/bhdouglass-indicator-weather.py:155
+#: ../indicator/bhdouglass-indicator-weather.py:157
 msgid "Rainy"
-msgstr ""
+msgstr "Lluvioso"
 
-#: ../indicator/bhdouglass-indicator-weather.py:120
+#: ../indicator/bhdouglass-indicator-weather.py:133
+#: ../indicator/bhdouglass-indicator-weather.py:161
 msgid "Snowy"
-msgstr ""
+msgstr "Nevado"
 
-#: ../indicator/bhdouglass-indicator-weather.py:121
+#: ../indicator/bhdouglass-indicator-weather.py:134
 msgid "Sleet"
-msgstr ""
+msgstr "Aguanieve"
 
-#: ../indicator/bhdouglass-indicator-weather.py:122
+#: ../indicator/bhdouglass-indicator-weather.py:135
+#: ../indicator/bhdouglass-indicator-weather.py:165
+#: ../indicator/bhdouglass-indicator-weather.py:167
 msgid "Windy"
-msgstr ""
+msgstr "Ventoso"
 
-#: ../indicator/bhdouglass-indicator-weather.py:123
+#: ../indicator/bhdouglass-indicator-weather.py:136
+#: ../indicator/bhdouglass-indicator-weather.py:153
 msgid "Foggy"
-msgstr ""
+msgstr "Brumoso"
 
-#: ../indicator/bhdouglass-indicator-weather.py:124
-#: ../indicator/bhdouglass-indicator-weather.py:125
-#: ../indicator/bhdouglass-indicator-weather.py:126
+#: ../indicator/bhdouglass-indicator-weather.py:137
+#: ../indicator/bhdouglass-indicator-weather.py:138
+#: ../indicator/bhdouglass-indicator-weather.py:139
+#: ../indicator/bhdouglass-indicator-weather.py:151
 msgid "Cloudy"
-msgstr ""
+msgstr "Nuboso"
 
-#: ../indicator/bhdouglass-indicator-weather.py:127
+#: ../indicator/bhdouglass-indicator-weather.py:140
+#: ../indicator/bhdouglass-indicator-weather.py:163
 msgid "Hail"
-msgstr ""
+msgstr "Granizo"
 
-#: ../indicator/bhdouglass-indicator-weather.py:128
+#: ../indicator/bhdouglass-indicator-weather.py:141
+#: ../indicator/bhdouglass-indicator-weather.py:159
 msgid "Stormy"
-msgstr ""
+msgstr "Tormentoso"
 
-#: ../indicator/bhdouglass-indicator-weather.py:129
-msgid "Tornado"
-msgstr ""
-
+#: ../indicator/bhdouglass-indicator-weather.py:142
 #: ../indicator/bhdouglass-indicator-weather.py:169
+msgid "Tornado"
+msgstr "Tornado"
+
+#: ../indicator/bhdouglass-indicator-weather.py:171
+msgid "Hurricane"
+msgstr ""
+
+#: ../indicator/bhdouglass-indicator-weather.py:173
+msgid "Extreme Cold"
+msgstr ""
+
+#: ../indicator/bhdouglass-indicator-weather.py:175
+msgid "Extreme Heat"
+msgstr ""
+
+#: ../indicator/bhdouglass-indicator-weather.py:253
 msgid "Forecast"
-msgstr ""
+msgstr "Previsión"
 
-#: ../indicator/bhdouglass-indicator-weather.py:172
+#: ../indicator/bhdouglass-indicator-weather.py:256
 msgid "Weather Settings"
-msgstr ""
+msgstr "Configuración de meteorología"
 
-#: ../indicator/bhdouglass-indicator-weather.py:204
-#: ../indicator/bhdouglass-indicator-weather.py:213
-#: ../indicator/bhdouglass-indicator-weather.py:226
-#: ../indicator/bhdouglass-indicator-weather.py:230
+#: ../indicator/bhdouglass-indicator-weather.py:303
+#: ../indicator/bhdouglass-indicator-weather.py:312
+#: ../indicator/bhdouglass-indicator-weather.py:325
+#: ../indicator/bhdouglass-indicator-weather.py:329
+#: ../indicator/bhdouglass-indicator-weather.py:344
+#: ../indicator/bhdouglass-indicator-weather.py:353
+#: ../indicator/bhdouglass-indicator-weather.py:363
+#: ../indicator/bhdouglass-indicator-weather.py:367
 msgid "Error fetching weather"
-msgstr ""
+msgstr "Error al recuperar el tiempo"
 
 #. TRANSLATORS You must ensure that both {condition} and {temperature} remain intact as they are used for replacing with the actual values. For example: Clear and 75°
-#: ../indicator/bhdouglass-indicator-weather.py:286
+#: ../indicator/bhdouglass-indicator-weather.py:423
 #, python-brace-format
 msgid "{condition} and {temperature}°"
-msgstr ""
+msgstr "{condition} y {temperature}°"

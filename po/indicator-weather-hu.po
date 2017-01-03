@@ -1,16 +1,16 @@
-# Italian translation for ut-indicator-weather
-# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
+# Hungarian translation for ut-indicator-weather
+# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
 # This file is distributed under the same license as the ut-indicator-weather package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ut-indicator-weather\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-01-03 06:18+0000\n"
-"PO-Revision-Date: 2016-12-30 15:36+0000\n"
-"Last-Translator: Emanuele Sorce <emanuele.sorce@hotmail.com>\n"
-"Language-Team: Italian <it@li.org>\n"
+"PO-Revision-Date: 2017-01-01 13:11+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,31 +31,31 @@ msgstr ""
 
 #: ../qml/Main.qml:25 ../indicator/bhdouglass-indicator-weather.py:284
 msgid "Please specify an api key"
-msgstr "per piacere specifica una chiave API"
+msgstr "Adja meg az API kulcsot"
 
 #: ../qml/Main.qml:29 ../indicator/bhdouglass-indicator-weather.py:287
 msgid "Please specify the latitude"
-msgstr "per piacere specifica la latitudine"
+msgstr "Adja meg a szélességet"
 
 #: ../qml/Main.qml:33 ../indicator/bhdouglass-indicator-weather.py:290
 msgid "Please specify the longitude"
-msgstr "per piacere specifica la longitudine"
+msgstr "Adja meg a hosszúságot"
 
 #: ../qml/Main.qml:37
 msgid "Saved the settings, please reboot"
-msgstr "Impostazioni salvate, per piacere riavvia"
+msgstr "A beállítások elmentve, indítsa újra az eszközt"
 
 #: ../qml/Main.qml:42
 msgid "Failed to save the settings"
-msgstr "Salvataggio delle impostazioni fallito"
+msgstr "Nem sikerült a beállítások mentése"
 
 #: ../qml/Main.qml:51
 msgid "Indicator Weather"
-msgstr "Indicatore meteo"
+msgstr "Időjárás Indikátor"
 
 #: ../qml/Main.qml:99
 msgid "Dark Sky API Key"
-msgstr "chiave API di Dark Sky"
+msgstr "Dark Sky API kulcs"
 
 #: ../qml/Main.qml:115
 msgid "OpenWeatherMap API Key"
@@ -63,47 +63,47 @@ msgstr ""
 
 #: ../qml/Main.qml:131
 msgid "Click to signup for an API key"
-msgstr "Clicca per registrarti e ottenere una chiave API"
+msgstr "Kattintson az API kulcs beszerzéseséhez"
 
 #: ../qml/Main.qml:145
 msgid "Latitude"
-msgstr "Latitudine"
+msgstr "Szélesség"
 
 #: ../qml/Main.qml:159
 msgid "Longitude"
-msgstr "Longitudine"
+msgstr "Hosszúság"
 
 #: ../qml/Main.qml:186
 msgid "Save"
-msgstr "Salva"
+msgstr "Mentés"
 
 #: ../qml/Main.qml:197
 msgid "Install Indicator"
-msgstr "Installa indicatore"
+msgstr "Indikátor telepítése"
 
 #: ../qml/Main.qml:208
 msgid "Uninstall Indicator"
-msgstr "Disinstalla indicatore"
+msgstr "Indikátor eltávolítása"
 
 #: ../qml/Main.qml:229
 msgid "Successfully installed, please reboot"
-msgstr "Installato con successo, per piacere riavvia"
+msgstr "Sikeres telepítés, indítsa újra az eszközt"
 
 #: ../qml/Main.qml:233
 msgid "Failed to install"
-msgstr "Installazione fallita"
+msgstr "Nem sikerült a telepítés"
 
 #: ../qml/Main.qml:241
 msgid "Successfully uninstalled, please reboot"
-msgstr "Disinstallato con successo, per piacere riavvia"
+msgstr "Sikeres eltávolítás, indítsa újra az eszközt"
 
 #: ../qml/Main.qml:245
 msgid "Failed to uninstall"
-msgstr "Disinstallazione fallita"
+msgstr "Sikertelen eltávolítás"
 
 #: ../qml/TemperatureUnitSelect.qml:19
 msgid "Temperature Unit"
-msgstr "Unità di misura della temperatura"
+msgstr "Hőmérsékleti egység"
 
 #: ../qml/TemperatureUnitSelect.qml:42
 msgid "Fahrenheit"
@@ -121,55 +121,55 @@ msgstr "Kelvin"
 #: ../indicator/bhdouglass-indicator-weather.py:131
 #: ../indicator/bhdouglass-indicator-weather.py:149
 msgid "Clear"
-msgstr "Limpido"
+msgstr "Tiszta"
 
 #: ../indicator/bhdouglass-indicator-weather.py:132
 #: ../indicator/bhdouglass-indicator-weather.py:155
 #: ../indicator/bhdouglass-indicator-weather.py:157
 msgid "Rainy"
-msgstr "Pioggia"
+msgstr "Esős"
 
 #: ../indicator/bhdouglass-indicator-weather.py:133
 #: ../indicator/bhdouglass-indicator-weather.py:161
 msgid "Snowy"
-msgstr "Neve"
+msgstr "Hó"
 
 #: ../indicator/bhdouglass-indicator-weather.py:134
 msgid "Sleet"
-msgstr "Acquaneve"
+msgstr "Ónos eső"
 
 #: ../indicator/bhdouglass-indicator-weather.py:135
 #: ../indicator/bhdouglass-indicator-weather.py:165
 #: ../indicator/bhdouglass-indicator-weather.py:167
 msgid "Windy"
-msgstr "Vento"
+msgstr "Szeles"
 
 #: ../indicator/bhdouglass-indicator-weather.py:136
 #: ../indicator/bhdouglass-indicator-weather.py:153
 msgid "Foggy"
-msgstr "Nebbia"
+msgstr "Ködös"
 
 #: ../indicator/bhdouglass-indicator-weather.py:137
 #: ../indicator/bhdouglass-indicator-weather.py:138
 #: ../indicator/bhdouglass-indicator-weather.py:139
 #: ../indicator/bhdouglass-indicator-weather.py:151
 msgid "Cloudy"
-msgstr "Nuvolo"
+msgstr "Felhős"
 
 #: ../indicator/bhdouglass-indicator-weather.py:140
 #: ../indicator/bhdouglass-indicator-weather.py:163
 msgid "Hail"
-msgstr "Grandine"
+msgstr "Jégeső"
 
 #: ../indicator/bhdouglass-indicator-weather.py:141
 #: ../indicator/bhdouglass-indicator-weather.py:159
 msgid "Stormy"
-msgstr "Tempesta"
+msgstr "Viharos"
 
 #: ../indicator/bhdouglass-indicator-weather.py:142
 #: ../indicator/bhdouglass-indicator-weather.py:169
 msgid "Tornado"
-msgstr "Tornado"
+msgstr "Tornádó"
 
 #: ../indicator/bhdouglass-indicator-weather.py:171
 msgid "Hurricane"
@@ -185,11 +185,11 @@ msgstr ""
 
 #: ../indicator/bhdouglass-indicator-weather.py:253
 msgid "Forecast"
-msgstr "Previsioni del meteo"
+msgstr "Előrejelzés"
 
 #: ../indicator/bhdouglass-indicator-weather.py:256
 msgid "Weather Settings"
-msgstr "Impostazioni meteo"
+msgstr "Időjárás beállítások"
 
 #: ../indicator/bhdouglass-indicator-weather.py:303
 #: ../indicator/bhdouglass-indicator-weather.py:312
@@ -200,10 +200,10 @@ msgstr "Impostazioni meteo"
 #: ../indicator/bhdouglass-indicator-weather.py:363
 #: ../indicator/bhdouglass-indicator-weather.py:367
 msgid "Error fetching weather"
-msgstr "Errore nel recupero del meteo"
+msgstr "Nem sikerült az időjárásadatok letöltése"
 
 #. TRANSLATORS You must ensure that both {condition} and {temperature} remain intact as they are used for replacing with the actual values. For example: Clear and 75°
 #: ../indicator/bhdouglass-indicator-weather.py:423
 #, python-brace-format
 msgid "{condition} and {temperature}°"
-msgstr "{condition} e {temperature}°"
+msgstr "{condition} és {temperature}°"
