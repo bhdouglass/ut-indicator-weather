@@ -79,6 +79,7 @@ class WeatherIndicator(object):
     lng = ''
     unit = 'f'
     retry_timeout = 1
+    owm_city_id = ''
 
     def __init__(self, bus):
         self.get_config()
@@ -219,7 +220,17 @@ class WeatherIndicator(object):
 
     def forecast_action_activated(self, action, data):
         logger.debug('forecast_action_activated')
-        subprocess.Popen(shlex.split('ubuntu-app-launch webbrowser-app https://darksky.net/forecast/{},{}'.format(self.lat, self.lng)))
+
+        url = ''
+        if self.provider == 'dark_sky':
+            url = 'https://darksky.net/forecast/{},{}'.format(self.lat, self.lng)
+        else:
+            if self.owm_city_id:
+                url = 'http://openweathermap.org/city/{}'.format(self.owm_city_id)
+            else:
+                url = 'http://openweathermap.org/'
+
+        subprocess.Popen(shlex.split('ubuntu-app-launch webbrowser-app {}'.format(url)))
 
     def settings_action_activated(self, action, data):
         logger.debug('settings_action_activated')
@@ -358,6 +369,7 @@ class WeatherIndicator(object):
                             self.current_temperature = int(data['main']['temp'])
                             self.current_condition_icon = self.get_icon(data['weather'][0]['id'])
                             self.current_condition_text = self.get_translation(data['weather'][0]['id'])
+                            self.owm_city_id = data['id']
 
                     else:
                         self.error = _('Error fetching weather')
