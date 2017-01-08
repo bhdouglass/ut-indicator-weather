@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: indicator-weather.bhdouglass\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-04 20:24+0000\n"
+"POT-Creation-Date: 2017-01-08 04:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,15 +29,15 @@ msgstr ""
 msgid "OpenWeatherMap"
 msgstr ""
 
-#: ../qml/Main.qml:25 ../indicator/bhdouglass-indicator-weather.py:294
+#: ../qml/Main.qml:25 ../indicator/bhdouglass-indicator-weather.py:295
 msgid "Please specify an api key"
 msgstr ""
 
-#: ../qml/Main.qml:29 ../indicator/bhdouglass-indicator-weather.py:297
+#: ../qml/Main.qml:29 ../indicator/bhdouglass-indicator-weather.py:298
 msgid "Please specify the latitude"
 msgstr ""
 
-#: ../qml/Main.qml:33 ../indicator/bhdouglass-indicator-weather.py:300
+#: ../qml/Main.qml:33 ../indicator/bhdouglass-indicator-weather.py:301
 msgid "Please specify the longitude"
 msgstr ""
 
@@ -183,27 +183,27 @@ msgstr ""
 msgid "Extreme Heat"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:263
+#: ../indicator/bhdouglass-indicator-weather.py:264
 msgid "Forecast"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:266
+#: ../indicator/bhdouglass-indicator-weather.py:267
 msgid "Weather Settings"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:313
-#: ../indicator/bhdouglass-indicator-weather.py:322
-#: ../indicator/bhdouglass-indicator-weather.py:335
-#: ../indicator/bhdouglass-indicator-weather.py:339
-#: ../indicator/bhdouglass-indicator-weather.py:354
-#: ../indicator/bhdouglass-indicator-weather.py:363
-#: ../indicator/bhdouglass-indicator-weather.py:374
-#: ../indicator/bhdouglass-indicator-weather.py:378
+#: ../indicator/bhdouglass-indicator-weather.py:314
+#: ../indicator/bhdouglass-indicator-weather.py:323
+#: ../indicator/bhdouglass-indicator-weather.py:336
+#: ../indicator/bhdouglass-indicator-weather.py:340
+#: ../indicator/bhdouglass-indicator-weather.py:355
+#: ../indicator/bhdouglass-indicator-weather.py:364
+#: ../indicator/bhdouglass-indicator-weather.py:375
+#: ../indicator/bhdouglass-indicator-weather.py:379
 msgid "Error fetching weather"
 msgstr ""
 
 #. TRANSLATORS You must ensure that both {condition} and {temperature} remain intact as they are used for replacing with the actual values. For example: Clear and 75°
-#: ../indicator/bhdouglass-indicator-weather.py:434
+#: ../indicator/bhdouglass-indicator-weather.py:435
 #, python-brace-format
 msgid "{condition} and {temperature}°"
 msgstr ""

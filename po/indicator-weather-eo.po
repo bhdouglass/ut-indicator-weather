@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ut-indicator-weather\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-01-03 06:18+0000\n"
+"POT-Creation-Date: 2017-01-04 20:24+0000\n"
 "PO-Revision-Date: 2016-12-26 17:22+0000\n"
 "Last-Translator: Sof <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-03 21:48+0000\n"
-"X-Generator: Launchpad (build 18298)\n"
+"X-Launchpad-Export-Date: 2017-01-08 04:28+0000\n"
+"X-Generator: Launchpad (build 18302)\n"
 
 #: ../qml/WeatherProviderSelect.qml:19
 msgid "Weather Provider"
@@ -29,15 +29,15 @@ msgstr ""
 msgid "OpenWeatherMap"
 msgstr ""
 
-#: ../qml/Main.qml:25 ../indicator/bhdouglass-indicator-weather.py:284
+#: ../qml/Main.qml:25 ../indicator/bhdouglass-indicator-weather.py:294
 msgid "Please specify an api key"
 msgstr "Bonvolu, difini API-ŝlosilon"
 
-#: ../qml/Main.qml:29 ../indicator/bhdouglass-indicator-weather.py:287
+#: ../qml/Main.qml:29 ../indicator/bhdouglass-indicator-weather.py:297
 msgid "Please specify the latitude"
 msgstr "Bonvolu, specifi la latitudon"
 
-#: ../qml/Main.qml:33 ../indicator/bhdouglass-indicator-weather.py:290
+#: ../qml/Main.qml:33 ../indicator/bhdouglass-indicator-weather.py:300
 msgid "Please specify the longitude"
 msgstr "Bonvolu, specifi la latitudon"
 
@@ -117,93 +117,93 @@ msgstr "Celsiuso"
 msgid "Kelvin"
 msgstr "Kelvino"
 
-#: ../indicator/bhdouglass-indicator-weather.py:130
 #: ../indicator/bhdouglass-indicator-weather.py:131
-#: ../indicator/bhdouglass-indicator-weather.py:149
+#: ../indicator/bhdouglass-indicator-weather.py:132
+#: ../indicator/bhdouglass-indicator-weather.py:150
 msgid "Clear"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:132
-#: ../indicator/bhdouglass-indicator-weather.py:155
-#: ../indicator/bhdouglass-indicator-weather.py:157
+#: ../indicator/bhdouglass-indicator-weather.py:133
+#: ../indicator/bhdouglass-indicator-weather.py:156
+#: ../indicator/bhdouglass-indicator-weather.py:158
 msgid "Rainy"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:133
-#: ../indicator/bhdouglass-indicator-weather.py:161
+#: ../indicator/bhdouglass-indicator-weather.py:134
+#: ../indicator/bhdouglass-indicator-weather.py:162
 msgid "Snowy"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:134
+#: ../indicator/bhdouglass-indicator-weather.py:135
 msgid "Sleet"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:135
-#: ../indicator/bhdouglass-indicator-weather.py:165
-#: ../indicator/bhdouglass-indicator-weather.py:167
+#: ../indicator/bhdouglass-indicator-weather.py:136
+#: ../indicator/bhdouglass-indicator-weather.py:166
+#: ../indicator/bhdouglass-indicator-weather.py:168
 msgid "Windy"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:136
-#: ../indicator/bhdouglass-indicator-weather.py:153
+#: ../indicator/bhdouglass-indicator-weather.py:137
+#: ../indicator/bhdouglass-indicator-weather.py:154
 msgid "Foggy"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:137
 #: ../indicator/bhdouglass-indicator-weather.py:138
 #: ../indicator/bhdouglass-indicator-weather.py:139
-#: ../indicator/bhdouglass-indicator-weather.py:151
+#: ../indicator/bhdouglass-indicator-weather.py:140
+#: ../indicator/bhdouglass-indicator-weather.py:152
 msgid "Cloudy"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:140
-#: ../indicator/bhdouglass-indicator-weather.py:163
+#: ../indicator/bhdouglass-indicator-weather.py:141
+#: ../indicator/bhdouglass-indicator-weather.py:164
 msgid "Hail"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:141
-#: ../indicator/bhdouglass-indicator-weather.py:159
+#: ../indicator/bhdouglass-indicator-weather.py:142
+#: ../indicator/bhdouglass-indicator-weather.py:160
 msgid "Stormy"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:142
-#: ../indicator/bhdouglass-indicator-weather.py:169
+#: ../indicator/bhdouglass-indicator-weather.py:143
+#: ../indicator/bhdouglass-indicator-weather.py:170
 msgid "Tornado"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:171
+#: ../indicator/bhdouglass-indicator-weather.py:172
 msgid "Hurricane"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:173
+#: ../indicator/bhdouglass-indicator-weather.py:174
 msgid "Extreme Cold"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:175
+#: ../indicator/bhdouglass-indicator-weather.py:176
 msgid "Extreme Heat"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:253
+#: ../indicator/bhdouglass-indicator-weather.py:263
 msgid "Forecast"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:256
+#: ../indicator/bhdouglass-indicator-weather.py:266
 msgid "Weather Settings"
 msgstr ""
 
-#: ../indicator/bhdouglass-indicator-weather.py:303
-#: ../indicator/bhdouglass-indicator-weather.py:312
-#: ../indicator/bhdouglass-indicator-weather.py:325
-#: ../indicator/bhdouglass-indicator-weather.py:329
-#: ../indicator/bhdouglass-indicator-weather.py:344
-#: ../indicator/bhdouglass-indicator-weather.py:353
+#: ../indicator/bhdouglass-indicator-weather.py:313
+#: ../indicator/bhdouglass-indicator-weather.py:322
+#: ../indicator/bhdouglass-indicator-weather.py:335
+#: ../indicator/bhdouglass-indicator-weather.py:339
+#: ../indicator/bhdouglass-indicator-weather.py:354
 #: ../indicator/bhdouglass-indicator-weather.py:363
-#: ../indicator/bhdouglass-indicator-weather.py:367
+#: ../indicator/bhdouglass-indicator-weather.py:374
+#: ../indicator/bhdouglass-indicator-weather.py:378
 msgid "Error fetching weather"
 msgstr ""
 
 #. TRANSLATORS You must ensure that both {condition} and {temperature} remain intact as they are used for replacing with the actual values. For example: Clear and 75°
-#: ../indicator/bhdouglass-indicator-weather.py:423
+#: ../indicator/bhdouglass-indicator-weather.py:434
 #, python-brace-format
 msgid "{condition} and {temperature}°"
 msgstr ""
