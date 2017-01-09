@@ -281,7 +281,7 @@ class WeatherIndicator(object):
         self.sub_menu.remove(self.MAIN_SECTION)
         self.sub_menu.insert_section(self.MAIN_SECTION, 'Weather', self._create_section())
 
-    def update_weather(self):  # TODO see if the network status can be checked/watched
+    def update_weather(self, setup_retry=True):  # TODO see if the network status can be checked/watched
         logger.debug('Updating weather using provider: {}'.format(self.provider))
         self.error = ''
 
@@ -385,23 +385,23 @@ class WeatherIndicator(object):
         self.action_group.change_action_state(self.CURRENT_ACTION, GLib.Variant.new_string(self.current_state()))
         self._update_menu()
 
-        if self.error:
+        if self.error and setup_retry:
             self.retry_timeout = 1
             GLib.timeout_add_seconds(60 * self.retry_timeout, self.retry)
 
         return True  # Make sure we keep running the timeout
 
     def retry(self):
-        logger.debug('retrying weather update after an error')
+        logger.debug('retrying weather update after an error, retry timeout: {}'.format(self.retry_timeout))
 
-        self.update_weather()
+        self.update_weather(setup_retry=False)  # Don't create a bunch of timeouts, could get ugly
         if self.error:
             self.retry_timeout += 1
 
             if self.retry_timeout >= 15:
                 self.retry_timeout = 15
 
-            GLib.timeout_add_seconds(60 * self.retry_timeout, self.update_weather)
+            GLib.timeout_add_seconds(60 * self.retry_timeout, self.retry)
 
         return False  # Don't let the timeout continue to run as we do an incremental backoff
 
