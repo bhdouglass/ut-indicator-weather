@@ -318,7 +318,7 @@ class WeatherIndicator(object):
                     if response.status == 200:
                         data = None
                         try:
-                            data = json.loads(response.readall().decode('utf-8'))
+                            data = json.loads(response.read().decode('utf-8'))
                         except ValueError:
                             self.error = _('Error fetching weather')
                             logger.exception('response is not valid json')

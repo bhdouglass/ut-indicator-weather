@@ -8,6 +8,5 @@
   "scripts": {
     "ilogs": "adb shell \"tail -f /home/phablet/.cache/upstart/bhdouglass-indicator-weather.log\"",
     "ilog": "adb shell \"cat /home/phablet/.cache/upstart/bhdouglass-indicator-weather.log\""
-  },
-  "dependencies": ["libpam0g-dev"]
+  }
 }

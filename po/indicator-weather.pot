@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Brian Douglass
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the indicator-weather.bhdouglass package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: indicator-weather.bhdouglass\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-19 13:42+0000\n"
+"POT-Creation-Date: 2018-06-19 13:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,22 @@ msgstr ""
 
 #: ../qml/WeatherProviderSelect.qml:68
 msgid "OpenWeatherMap"
+msgstr ""
+
+#: ../qml/TemperatureUnitSelect.qml:19
+msgid "Temperature Unit"
+msgstr ""
+
+#: ../qml/TemperatureUnitSelect.qml:42
+msgid "Fahrenheit"
+msgstr ""
+
+#: ../qml/TemperatureUnitSelect.qml:70
+msgid "Celsius"
+msgstr ""
+
+#: ../qml/TemperatureUnitSelect.qml:98
+msgid "Kelvin"
 msgstr ""
 
 #: ../qml/Main.qml:25 ../indicator/bhdouglass-indicator-weather.py:295
@@ -57,19 +73,19 @@ msgstr ""
 msgid "Dark Sky API Key"
 msgstr ""
 
-#: ../qml/Main.qml:115
+#: ../qml/Main.qml:116
 msgid "OpenWeatherMap API Key"
 msgstr ""
 
-#: ../qml/Main.qml:131
+#: ../qml/Main.qml:133
 msgid "Click to signup for an API key"
 msgstr ""
 
-#: ../qml/Main.qml:145
+#: ../qml/Main.qml:143
 msgid "Latitude"
 msgstr ""
 
-#: ../qml/Main.qml:159
+#: ../qml/Main.qml:158
 msgid "Longitude"
 msgstr ""
 
@@ -85,36 +101,25 @@ msgstr ""
 msgid "Uninstall Indicator"
 msgstr ""
 
-#: ../qml/Main.qml:229
+#: ../qml/Main.qml:218
+msgid ""
+"* Before uninstalling the app be sure to uninstall the indicator here first"
+msgstr ""
+
+#: ../qml/Main.qml:235
 msgid "Successfully installed, please reboot"
 msgstr ""
 
-#: ../qml/Main.qml:233
+#: ../qml/Main.qml:239
 msgid "Failed to install"
 msgstr ""
 
-#: ../qml/Main.qml:241
+#: ../qml/Main.qml:247
 msgid "Successfully uninstalled, please reboot"
 msgstr ""
 
-#: ../qml/Main.qml:245
+#: ../qml/Main.qml:251
 msgid "Failed to uninstall"
-msgstr ""
-
-#: ../qml/TemperatureUnitSelect.qml:19
-msgid "Temperature Unit"
-msgstr ""
-
-#: ../qml/TemperatureUnitSelect.qml:42
-msgid "Fahrenheit"
-msgstr ""
-
-#: ../qml/TemperatureUnitSelect.qml:70
-msgid "Celsius"
-msgstr ""
-
-#: ../qml/TemperatureUnitSelect.qml:98
-msgid "Kelvin"
 msgstr ""
 
 #: ../indicator/bhdouglass-indicator-weather.py:131

@@ -72,26 +72,26 @@ MainView {
                 }
                 spacing: units.gu(1)
 
-                WeatherProviderSelect {
-                    settings: settings
+                RowLayout {
                     Layout.fillWidth: true
-                }
 
-                Rectangle { // Spacer
-                    Layout.preferredHeight: units.gu(1)
-                }
-
-                Image {
-                    visible: settings.provider == 'dark_sky'
-                    source: "../assets/darksky.png"
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: Qt.openUrlExternally('https://darksky.net/poweredby/')
+                    WeatherProviderSelect {
+                        settings: settings
+                        Layout.fillWidth: true
                     }
 
-                    Layout.preferredWidth: parent.width / 4
-                    Layout.preferredHeight: width / 2
+                    Image {
+                        visible: settings.provider == 'dark_sky'
+                        source: "../assets/darksky.png"
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: Qt.openUrlExternally('https://darksky.net/poweredby/')
+                        }
+
+                        Layout.preferredWidth: parent.width / 4
+                        Layout.preferredHeight: width / 2
+                    }
                 }
 
                 Label {
@@ -103,7 +103,8 @@ MainView {
                 TextField {
                     visible: settings.provider == 'dark_sky'
                     id: darkSkyApiKey
-                    text: settings.darkSkyApiKey
+
+                    Component.onCompleted: text = settings.darkSkyApiKey
 
                     onTextChanged: {
                         settings.darkSkyApiKey = text;
@@ -119,7 +120,8 @@ MainView {
                 TextField {
                     visible: settings.provider == 'open_weather_map'
                     id: owmApiKey
-                    text: settings.owmApiKey
+
+                    Component.onCompleted: text = settings.owmApiKey
 
                     onTextChanged: {
                         settings.owmApiKey = text;
@@ -137,10 +139,6 @@ MainView {
                     }
                 }
 
-                Rectangle { // Spacer
-                    Layout.preferredHeight: units.gu(1)
-                }
-
                 Label {
                     text: i18n.tr("Latitude")
                     Layout.fillWidth: true
@@ -148,7 +146,8 @@ MainView {
 
                 TextField {
                     id: lat
-                    text: settings.lat
+
+                    Component.onCompleted: text = settings.lat
 
                     onTextChanged: {
                         settings.lat = text;
@@ -162,7 +161,8 @@ MainView {
 
                 TextField {
                     id: lng
-                    text: settings.lng
+
+                    Component.onCompleted: text = settings.lng
 
                     onTextChanged: {
                         settings.lng = text;
@@ -210,6 +210,12 @@ MainView {
                         message.visible = false;
                         Indicator.uninstall();
                     }
+                }
+
+                Label {
+                    textSize: Label.XSmall
+
+                    text: i18n.tr('* Before uninstalling the app be sure to uninstall the indicator here first')
                 }
 
                 Label {
