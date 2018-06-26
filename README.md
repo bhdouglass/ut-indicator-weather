@@ -13,7 +13,7 @@ If you are interested in translating indicator weather, head over to our
 
 ## About the Indicator
 
-The indicator itself is rather simle. It's a python script that exports a Gtk
+The indicator itself is rather simple. It's a python script that exports a Gtk
 menu over DBus. To start the script there is an Upstart config file located at
 indicator/bhdouglass-indicator-weather.conf. This starts the indicator when
 Unity starts the rest of the indicators. The other important file is
